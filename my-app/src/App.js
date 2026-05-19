@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState, useEffect } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import './styles/App.css';
 import PostList from "./components/PostList";
@@ -10,6 +10,7 @@ import PostFilter from "./components/PostFilter/PostFilter";
 import MyModal from "./components/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import { usePosts } from "./hooks/usePosts";
+import axios from "axios";
 
 const sortOptions = [
   { value: 'title', name: 'По названию' },
@@ -17,15 +18,20 @@ const sortOptions = [
 ];
 
 function App() {
-  const [posts, setPosts] = useState([
-    { id: uuidv4(), title: 'Хуита 1', body: 'Неважная Хуита 1' },
-    { id: uuidv4(), title: 'Хуита 2', body: 'Неважная Хуита 2' },
-    { id: uuidv4(), title: 'Хуита 3', body: 'Неважная Хуита 3' },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   const [filter, setFilter] = useState({ sort: '', query: '' });
   const [modal, setModal] = useState(false);
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  async function fetchPosts() {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/posts');
+    setPosts(response.data);
+  }
 
   const removePost = useCallback((id) => {
     setPosts(prev => prev.filter(p => p.id !== id));
@@ -50,7 +56,7 @@ function App() {
         filter={filter}
         setFilter={setFilter}
       />
-      <PostList remove={removePost} title='Список неважной Хуиты' posts={sortedAndSearchedPosts} />
+      <PostList className="post-delete-btn" remove={removePost} title='Список какой-то хуйни' posts={sortedAndSearchedPosts} />
     </div>
   )
 }

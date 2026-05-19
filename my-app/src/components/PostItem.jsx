@@ -1,7 +1,7 @@
 import React from "react";
 import MyButton from "./UI/button/MyButton";
 
-const PostItem = ({ post, number, remove }) => {
+const PostItem = ({ post, number, remove, className }) => {
     return (
         <div className="post">
             <div className="post__content">
@@ -10,8 +10,8 @@ const PostItem = ({ post, number, remove }) => {
                     {post.body}
                 </div>
             </div>
-            <div className="post__btns">
-                <MyButton onClick={() => remove(post.id)}>Удалить Хуету {number}</MyButton>
+            <div classNaeme="post__btns">
+                <MyButton className={className} onClick={() => remove(post.id)}>Удалить хуйню</MyButton>
             </div>
         </div>
     );

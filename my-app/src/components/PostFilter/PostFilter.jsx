@@ -8,7 +8,7 @@ const PostFilter = ({ filter, setFilter, sortOptions }) => {
             <MyInput
                 onChange={e => setFilter(prev => ({ ...prev, query: e.target.value }))}
                 value={filter.query}
-                placeholder="Поиск"
+                placeholder="Поиск хуйни"
             />
             <MySelect
                 value={filter.sort}

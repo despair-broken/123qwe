@@ -2,11 +2,11 @@ import React from "react";
 import PostItem from "./PostItem";
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-const PostList = ({ title, posts, remove }) => {
+const PostList = ({ title, posts, remove, className }) => {
     if (!posts.length) {
         return (
             <h1 className="post__list__title">
-                Посты не найдены!
+                Ни одной хуйни не найдено!
             </h1>
         )
     }
@@ -31,6 +31,7 @@ const PostList = ({ title, posts, remove }) => {
                                     remove={remove}
                                     number={index + 1}
                                     post={post}
+                                    className={className}
                                 />
                             </div>
                         </CSSTransition>

@@ -22,9 +22,9 @@ const PostForm = ({ create }) => {
 
     return (
         <form>
-            <MyInput value={post.title} onChange={e => setPost(prevPost => ({ ...prevPost, title: e.target.value }))} type="text" placeholder="Название поста"></MyInput>
-            <MyInput value={post.body} onChange={e => setPost(prevPost => ({ ...prevPost, body: e.target.value }))} type="text" placeholder="Описание поста"></MyInput>
-            <MyButton onClick={addNewPost}>Создать пост</MyButton>
+            <MyInput value={post.title} onChange={e => setPost(prevPost => ({ ...prevPost, title: e.target.value }))} type="text" placeholder="Название хуйни"></MyInput>
+            <MyInput value={post.body} onChange={e => setPost(prevPost => ({ ...prevPost, body: e.target.value }))} type="text" placeholder="Описание хуйни"></MyInput>
+            <MyButton onClick={addNewPost}>Добавить хуйню</MyButton>
         </form>
     );
 }

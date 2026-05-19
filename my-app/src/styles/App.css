@@ -54,3 +54,8 @@
     transform: translateX(-150px);
     transition: all 500ms ease;
 }
+
+.post-delete-btn {
+    width: 100px;
+    margin-left: 20px;
+}
