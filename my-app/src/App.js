@@ -9,6 +9,7 @@ import MyInput from "./components/UI/input/MyInput";
 import PostFilter from "./components/PostFilter/PostFilter";
 import MyModal from "./components/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
+import { usePosts } from "./hooks/usePosts";
 
 const sortOptions = [
   { value: 'title', name: 'По названию' },
@@ -23,8 +24,8 @@ function App() {
   ]);
 
   const [filter, setFilter] = useState({ sort: '', query: '' });
-
   const [modal, setModal] = useState(false);
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   const removePost = useCallback((id) => {
     setPosts(prev => prev.filter(p => p.id !== id));
@@ -33,15 +34,6 @@ function App() {
   const handleCreatePost = useCallback((newPost) => {
     setPosts(prev => [...prev, newPost]);
   }, []);
-
-  const sortedPosts = useMemo(() => {
-    if (!filter.sort) return posts;
-    return sortArray(posts, filter.sort);
-  }, [posts, filter.sort]);
-
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter(p => p.title.toLowerCase().includes(filter.query.toLowerCase()));
-  }, [filter.query, sortedPosts]);
 
   return (
     <div className="App">
