@@ -7,6 +7,8 @@ import MySelect from "./components/UI/select/MySelect";
 import { sortArray } from "./utils/sort";
 import MyInput from "./components/UI/input/MyInput";
 import PostFilter from "./components/PostFilter/PostFilter";
+import MyModal from "./components/MyModal/MyModal";
+import MyButton from "./components/UI/button/MyButton";
 
 const sortOptions = [
   { value: 'title', name: 'По названию' },
@@ -21,6 +23,8 @@ function App() {
   ]);
 
   const [filter, setFilter] = useState({ sort: '', query: '' });
+
+  const [modal, setModal] = useState(false);
 
   const removePost = useCallback((id) => {
     setPosts(prev => prev.filter(p => p.id !== id));
@@ -41,6 +45,10 @@ function App() {
 
   return (
     <div className="App">
+      <MyButton className="open-modal-btn" onClick={() => setModal(true)}>Если тебе грустно, нажми</MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
+        <h1 className="post__list__title">Ты хуесос</h1>
+      </MyModal>
       <PostForm
         create={handleCreatePost}
       />
