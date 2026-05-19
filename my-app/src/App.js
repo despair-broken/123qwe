@@ -5,6 +5,8 @@ import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
 import MySelect from "./components/UI/select/MySelect";
 import { sortArray } from "./utils/sort";
+import MyInput from "./components/UI/input/MyInput";
+import PostFilter from "./components/PostFilter/PostFilter";
 
 const sortOptions = [
   { value: 'title', name: 'По названию' },
@@ -18,7 +20,7 @@ function App() {
     { id: uuidv4(), title: 'Хуита 3', body: 'Неважная Хуита 3' },
   ]);
 
-  const [selectedSort, setSelectedSort] = useState('');
+  const [filter, setFilter] = useState({ sort: '', query: '' });
 
   const removePost = useCallback((id) => {
     setPosts(prev => prev.filter(p => p.id !== id));
@@ -29,9 +31,13 @@ function App() {
   }, []);
 
   const sortedPosts = useMemo(() => {
-    if (!selectedSort) return posts;
-    return sortArray(posts, selectedSort);
-  }, [posts, selectedSort]);
+    if (!filter.sort) return posts;
+    return sortArray(posts, filter.sort);
+  }, [posts, filter.sort]);
+
+  const sortedAndSearchedPosts = useMemo(() => {
+    return sortedPosts.filter(p => p.title.toLowerCase().includes(filter.query.toLowerCase()));
+  }, [filter.query, sortedPosts]);
 
   return (
     <div className="App">
@@ -39,18 +45,12 @@ function App() {
         create={handleCreatePost}
       />
       <hr className="separator" />
-      <div>
-        <MySelect
-          value={selectedSort}
-          onChange={setSelectedSort}
-          defaultValue="Сортировка"
-          options={sortOptions}
-        />
-      </div>
-      {sortedPosts.length > 0
-        ? <PostList remove={removePost} title='Список неважной Хуиты' posts={sortedPosts} />
-        : <h1 className="post__list__title">Посты не найдены!</h1>
-      }
+      <PostFilter
+        sortOptions={sortOptions}
+        filter={filter}
+        setFilter={setFilter}
+      />
+      <PostList remove={removePost} title='Список неважной Хуиты' posts={sortedAndSearchedPosts} />
     </div>
   )
 }
