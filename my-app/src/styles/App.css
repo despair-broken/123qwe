@@ -1,61 +1,92 @@
+/** @format */
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #root {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .App {
-    width: 800px;
+  width: 800px;
 }
 
 .post {
-    display: flex;
-    padding: 15px;
-    border: 2px solid teal;
-    margin-top: 15px;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  padding: 15px;
+  border: 2px solid teal;
+  margin-top: 15px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .post__list__title {
-    text-align: center;
+  text-align: center;
 }
 
 .separator {
-    margin: 15px 0px;
+  margin: 15px 0px;
 }
 
 .open-modal-btn {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .post-enter {
-    opacity: 0;
-    transform: translateX(-150px);
+  opacity: 0;
+  transform: translateX(-150px);
 }
 
 .post-enter-active {
-    opacity: 1;
-    transform: translateX(0);
-    transition: all 500ms ease;
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 500ms ease;
 }
 
 .post-exit {
-    opacity: 1;
+  opacity: 1;
 }
 
 .post-exit-active {
-    opacity: 0;
-    transform: translateX(-150px);
-    transition: all 500ms ease;
+  opacity: 0;
+  transform: translateX(-150px);
+  transition: all 500ms ease;
 }
 
 .post-delete-btn {
-    width: 100px;
-    margin-left: 20px;
+  width: 100px;
+  margin-left: 20px;
+}
+
+.loader-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.pagination-wrapper {
+  margin-top: 30px;
+  margin-bottom: 5px;
+}
+
+.pagination__item {
+  width: 50px;
+  margin: 0 auto;
+  border: 1px solid teal;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination__item:not(:last-child) {
+  margin-right: 15px;
+}
+
+.pagination__item--active {
+  font-weight: bold;
+  border: 1px solid black;
+  
 }
